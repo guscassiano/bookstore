@@ -7,3 +7,6 @@ class Product(models.Model):
     price = models.PositiveIntegerField(null=True) # Criando campo de números inteiros e positivos e habilitado o campo nulo
     active = models.BooleanField(default=True) # Criando um campo boleano e habilitando o mesmo por padrão ativo
     category = models.ManyToManyField(Category, blank=True) # Criando um relacionamento da classe Category de muitos para muitos e habilitando os valores nulos, assim permite que cadastre o produto para de uma categoria
+
+    def __str__(self):
+        return self.title

@@ -11,3 +11,5 @@ class CategorySerializer(serializers.ModelSerializer): # neste caso não adicion
             'description',
             'active'
         ]
+
+        extra_kwargs = {"slug": {"required": False}}
