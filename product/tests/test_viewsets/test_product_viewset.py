@@ -2,6 +2,7 @@ import json
 
 from rest_framework.test import APIClient, APITestCase
 from rest_framework.views import status
+from rest_framework.authtoken.models import Token
 
 from django.urls import reverse
 
@@ -14,7 +15,6 @@ class TestProductViewSet(APITestCase):
 
     def setUp(self):
         self.user = UserFactory()
-
         self.product = ProductFactory(
             title = 'pro controller',
             price = 200.00
