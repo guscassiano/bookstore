@@ -5,12 +5,10 @@ FROM python:3.12.3-slim as python-base
 ENV PYTHONUNBUFFERED=1 \
     # prevents python creating .pyc files
     PYTHONDONTWRITEBYTECODE=1 \
-    \
     # pip
     PIP_NO_CACHE_DIR=off \
     PIP_DISABLE_PIP_VERSION_CHECK=on \
     PIP_DEFAULT_TIMEOUT=100 \
-    \
     # poetry
     # https://python-poetry.org/docs/configuration/#using-environment-variables
     POETRY_VERSION=1.0.3 \
@@ -21,7 +19,6 @@ ENV PYTHONUNBUFFERED=1 \
     POETRY_VIRTUALENVS_IN_PROJECT=true \
     # do not ask any interactive question
     POETRY_NO_INTERACTION=1 \
-    \
     # paths
     # this is where our requirements + virtual environment will live
     PYSETUP_PATH="/opt/pysetup" \
@@ -44,7 +41,7 @@ RUN pip install poetry
 # install postgres dependencies inside of Docker
 RUN apt-get update \
     && apt-get -y install libpq-dev gcc \
-    && pip install psycopg2
+    && pip install psycopg2-binary
 
 # copy project requirement files here to ensure they will be cached.
 WORKDIR $PYSETUP_PATH
