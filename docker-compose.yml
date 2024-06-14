@@ -1,0 +1,25 @@
+version: '3.9' # versão do docker compose sendo utilizada, importante definir a versão pois cada uma tem uma alteração
+
+services: #serviços que serão criados pelo docker compose
+  web: #a partir daqui será construida a imagem do web ou backend
+    build: . #o ponto significa que ele irá gerar a imagem com tudo que esta no diretório que se encontra
+    command: python manage.py runserver 0.0.0.0:8000 # este é o comando que ele irá executar após gerar a imagem
+    volumes: #define o diretório onde ficará os arquivos do projeto no container
+      - .:/usr/src/app/
+    ports: #define a porta que a aplicação irá operar tanto na máquina local quanto no container
+      - 8000:8000
+    env_file: #define onde esta as variáveis de ambiente que serõ executadas dentro do container
+      - ./.env
+    depends_on: #solicita ao compose o que é necessário para gerar a imagem da aplicação, do que ela depende. Neste caso, do banco de dados já estar de pé
+      - db
+  db: #a partir daqui será construida a imagem do banco de dados
+    image: postgres:13.0-alpine #utilizaremos a imagem do postgre V13 do Docker Hub
+    volumes: #caminho onde ficará os arquivo do banco
+      - postgres_data:/var/lib/postgresql/data/
+    environment: #define as variáveis ambientes do banco postgre
+      - POSTGRES_USER=dev
+      - POSTGRES_PASSWORD=dev
+      - POSTGRES_DB=bookstore_db
+
+volumes: #define volumes nomeados que serão usados pelos serviços
+  postgres_data:

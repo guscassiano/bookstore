@@ -1,5 +1,5 @@
 from pathlib import Path
-import sys
+import sys, os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -16,7 +16,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # Determine if we're running tests
-IS_TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
+IS_TESTING = len(sys.argv) > 1 and sys.argv[1] == "test"
 
 # Application definition
 
@@ -27,16 +27,16 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'django_extensions',
-    'order',
-    'product',
+    "django_extensions",
+    "order",
+    "product",
     "rest_framework",
     "rest_framework.authtoken",
 ]
 
 # Include debug toolbar only if not running tests
 if DEBUG and not IS_TESTING:
-    INSTALLED_APPS += ['debug_toolbar']
+    INSTALLED_APPS += ["debug_toolbar"]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -50,10 +50,10 @@ MIDDLEWARE = [
 
 # Include debug toolbar middleware only if not running tests
 if DEBUG and not IS_TESTING:
-    MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware']
+    MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]
 
 DEBUG_TOOLBAR_CONFIG = {
-    'SHOW_TOOLBAR_CALLBACK': lambda request: DEBUG and not IS_TESTING,
+    "SHOW_TOOLBAR_CALLBACK": lambda request: DEBUG and not IS_TESTING,
 }
 
 ROOT_URLCONF = "bookstore.urls"
@@ -81,8 +81,12 @@ WSGI_APPLICATION = "bookstore.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
+        "NAME": os.environ.get("SQL_DATABASE", BASE_DIR / "db.sqlite3"),
+        "USER": os.environ.get("SQL_USER", "user"),
+        "PASSWORD": os.environ.get("SQL_PASSWORD", "password"),
+        "HOST": os.environ.get("SQL_HOST", "localhost"),
+        "PORT": os.environ.get("SQL_PORT", "5432"),
     }
 }
 
@@ -126,8 +130,16 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 INTERNAL_IPS = [
-    '127.0.0.1',
+    "127.0.0.1",
 ]
+
+SECRET_KEY = os.environ.get("SECRET_KEY")
+
+DEBUG = int(os.environ.get("DEBUG", default=0))
+
+# 'DJANGO ALLOWED HOSTS' shoiuld be a single string of hosts with a soace between each.
+# For example: 'DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]'
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
