@@ -10,6 +10,8 @@ services: #serviços que serão criados pelo docker compose
       - 8000:8000
     env_file: #define onde esta as variáveis de ambiente que serõ executadas dentro do container
       - ./.env
+    networks: #rede bridge para comunicação entre containers
+      - backend
     depends_on: #solicita ao compose o que é necessário para gerar a imagem da aplicação, do que ela depende. Neste caso, do banco de dados já estar de pé
       - db
   db: #a partir daqui será construida a imagem do banco de dados
@@ -20,6 +22,12 @@ services: #serviços que serão criados pelo docker compose
       - POSTGRES_USER=dev
       - POSTGRES_PASSWORD=dev
       - POSTGRES_DB=bookstore_db
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
 
 volumes: #define volumes nomeados que serão usados pelos serviços
   postgres_data:
