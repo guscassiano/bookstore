@@ -22,6 +22,8 @@ services: #serviços que serão criados pelo docker compose
       - POSTGRES_USER=dev
       - POSTGRES_PASSWORD=dev
       - POSTGRES_DB=bookstore_db
+    ports: #define a porta que a aplicação irá operar tanto na máquina local quanto no container
+      - 5432:5432
     networks:
       - backend
 
