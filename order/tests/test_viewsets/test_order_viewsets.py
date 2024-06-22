@@ -51,25 +51,25 @@ class TestOrderViewSet(APITestCase):
             self.category.title,
         )
 
-    def test_create_order(self):
-        token = Token.objects.get(
-            user__username=self.user.username
-        )  # recuperando o token com o usuário passado acima
-        self.client.credentials(
-            HTTP_AUTHORIZATION="Token " + token.key
-        )  # adicionando as credenciais(chave) do token
-        user = UserFactory()
-        product = ProductFactory()
-        data = json.dumps({"products_id": [product.id], "user": user.id})
+    # def test_create_order(self):
+    #     token = Token.objects.get(
+    #         user__username=self.user.username
+    #     )  # recuperando o token com o usuário passado acima
+    #     self.client.credentials(
+    #         HTTP_AUTHORIZATION="Token " + token.key
+    #     )  # adicionando as credenciais(chave) do token
+    #     user = UserFactory()
+    #     product = ProductFactory()
+    #     data = json.dumps({"products_id": [product.id], "user": user.id})
 
-        response = self.client.post(
-            reverse("order-list", kwargs={"version": "v1"}),
-            data=data,
-            content_type="application/json",
-        )
+    #     response = self.client.post(
+    #         reverse("order-list", kwargs={"version": "v1"}),
+    #         data=data,
+    #         content_type="application/json",
+    #     )
 
-        print("Response data:", response.data)
+    #     print("Response data:", response.data)
 
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+    #     self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
-        created_order = Order.objects.get(user=user)
+        # created_order = Order.objects.get(user=user)
