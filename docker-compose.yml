@@ -5,7 +5,7 @@ services: #serviços que serão criados pelo docker compose
     build: . #o ponto significa que ele irá gerar a imagem com tudo que esta no diretório que se encontra
     command: python manage.py runserver 0.0.0.0:8000 # este é o comando que ele irá executar após gerar a imagem
     volumes: #define o diretório onde ficará os arquivos do projeto no container
-      - app_data:/usr/src/app/
+      - .:/usr/src/app/
     ports: #define a porta que a aplicação irá operar tanto na máquina local quanto no container
       - 8000:8000
     env_file: #define onde esta as variáveis de ambiente que serão executadas dentro do container
@@ -33,4 +33,3 @@ services: #serviços que serão criados pelo docker compose
 
 volumes: #define volumes nomeados que serão usados pelos serviços
   postgres_data:
-  app_data:
