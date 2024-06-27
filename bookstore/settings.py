@@ -40,6 +40,7 @@ if DEBUG and not IS_TESTING:
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -75,6 +76,11 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "bookstore.wsgi.application"
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
@@ -141,7 +147,9 @@ INTERNAL_IPS = [
 
 # 'DJANGO ALLOWED HOSTS' shoiuld be a single string of hosts with a soace between each.
 # For example: 'DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]'
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "").split(" ")
+# ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "").split(" ")
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'bookstore-api-gustavo-ca3da30ed2ee.herokuapp.com']
 
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
