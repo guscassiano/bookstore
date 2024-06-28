@@ -1,4 +1,4 @@
-version: '3.9' # versão do docker compose sendo utilizada, importante definir a versão pois cada uma tem uma alteração
+version: '2.27.0' # versão do docker compose sendo utilizada, importante definir a versão pois cada uma tem uma alteração
 
 services: #serviços que serão criados pelo docker compose
   web: #a partir daqui será construida a imagem do web ou backend
@@ -8,10 +8,10 @@ services: #serviços que serão criados pelo docker compose
       - .:/usr/src/app/
     ports: #define a porta que a aplicação irá operar tanto na máquina local quanto no container
       - 8000:8000
-    env_file: #define onde esta as variáveis de ambiente que serõ executadas dentro do container
+    env_file: #define onde esta as variáveis de ambiente que serão executadas dentro do container
       - ./.env
-    networks: #rede bridge para comunicação entre containers
-      - backend
+    # networks: #rede bridge para comunicação entre containers
+    #   - backend
     depends_on: #solicita ao compose o que é necessário para gerar a imagem da aplicação, do que ela depende. Neste caso, do banco de dados já estar de pé
       - db
   db: #a partir daqui será construida a imagem do banco de dados
@@ -19,15 +19,17 @@ services: #serviços que serão criados pelo docker compose
     volumes: #caminho onde ficará os arquivo do banco
       - postgres_data:/var/lib/postgresql/data/
     environment: #define as variáveis ambientes do banco postgre
-      - POSTGRES_USER=dev
-      - POSTGRES_PASSWORD=dev
-      - POSTGRES_DB=bookstore_db
-    networks:
-      - backend
+      - POSTGRES_USER=bookstore_dev
+      - POSTGRES_PASSWORD=bookstore_dev
+      - POSTGRES_DB=bookstore_dev_db
+    ports: #define a porta que a aplicação irá operar tanto na máquina local quanto no container
+      - 5433:5432
+    # networks:
+    #   - backend
 
-networks:
-  backend:
-    driver: bridge
+# networks:
+#   backend:
+#     driver: bridge
 
 volumes: #define volumes nomeados que serão usados pelos serviços
   postgres_data:
