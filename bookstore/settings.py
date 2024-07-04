@@ -149,7 +149,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # For example: 'DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]'
 # ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "").split(" ")
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'bookstore-api-gustavo-ca3da30ed2ee.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'bookstore-api-gustavo-ca3da30ed2ee.herokuapp.com', 'guscassiano.pythonanywhere.com']
 
 REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
