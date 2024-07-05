@@ -56,5 +56,5 @@ jobs:
           PA_API_TOKEN: ${{ secrets.PYTHONANYWHERE_API_TOKEN }}
         run: |
           pip install pythonanywhere
-          pa_autoconfigure_django.py --python=3.10 https://github.com/<your-github-username>/<your-repo-name>.git
+          pa_autoconfigure_django.py --python=3.10 https://github.com/guscassiano/bookstore.git
           pa_manage.py migrate
