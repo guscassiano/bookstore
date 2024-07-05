@@ -31,6 +31,7 @@ def update(request):
             logger.error(f'Erro inesperado: {e}')
             return HttpResponse("An unexpected error occurred. Check logs for details.", status=500)
     else:
+        logger.warning('Tentativa de acesso com método não permitido')
         return HttpResponse("Couldn't update the code on PythonAnywhere. Invalid request method.", status=400)
 
 
