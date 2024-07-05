@@ -14,6 +14,8 @@ services: #serviços que serão criados pelo docker compose
     #   - backend
     depends_on: #solicita ao compose o que é necessário para gerar a imagem da aplicação, do que ela depende. Neste caso, do banco de dados já estar de pé
       - db
+    restart: always
+
   db: #a partir daqui será construida a imagem do banco de dados
     image: postgres:13.0-alpine #utilizaremos a imagem do postgre V13 do Docker Hub
     volumes: #caminho onde ficará os arquivo do banco
@@ -26,6 +28,8 @@ services: #serviços que serão criados pelo docker compose
       - 5433:5432
     # networks:
     #   - backend
+    restart: always
+
 
 # networks:
 #   backend:

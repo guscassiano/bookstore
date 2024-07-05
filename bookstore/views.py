@@ -7,6 +7,7 @@ import git
 @csrf_exempt
 def update(request):
     if request.method == "POST":
+        print('Recebido Update')
         '''
         pass the path of the diectory where your project will be
         stored on PythonAnywhere in the git.Repo() as parameter.
