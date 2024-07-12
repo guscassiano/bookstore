@@ -17,7 +17,7 @@ This is a backend application called Bookstore where an API was created with Dja
 1. Clone this project:
 
     ```shell
-    git clone https://github.com/drsantos20/bookstore.git
+    git clone https://github.com/guscassiano/bookstore.git
     ```
 
 2. Install dependencies:
