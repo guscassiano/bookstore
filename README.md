@@ -8,7 +8,7 @@ This is a backend application called Bookstore where an API was created with Dja
 
 ### Prerequisites
 
-- Python 3.12.3 or later
+- Python 3.10.0 or later
 - [Poetry](https://python-poetry.org/docs/#installation)
 - [Docker](https://docs.docker.com/get-docker/) & [docker-compose](https://docs.docker.com/compose/install/)
 
