@@ -1,17 +1,18 @@
-# bookstore
+# Bookstore
 
-Bookstore APP from backend Python course from EBAC
+Bookstore APP from backend Python course from EBAC.
 
+## Description
+
+This is a backend application called Bookstore where an API was created with Django Rest Framework and deployed in the cloud on PythonAnywhere using CI/CD pipelines.
 
 ### Prerequisites
 
-```
-Python 3.12.3>
-Poetry
-Docker && docker-compose
-```
+- Python 3.12.3 or later
+- [Poetry](https://python-poetry.org/docs/#installation)
+- [Docker](https://docs.docker.com/get-docker/) & [docker-compose](https://docs.docker.com/compose/install/)
 
-## Quickstart
+## Installation
 
 1. Clone this project:
 
@@ -26,22 +27,36 @@ Docker && docker-compose
     poetry install
     ```
 
-3. Run local dev server:
+## Quickstart
+
+1. Run local dev server:
 
     ```shell
-    poetry run manage.py migrate
+    poetry run python manage.py migrate
     poetry run python manage.py runserver
     ```
 
-4. Run docker dev server environment:
+2. Run docker dev server environment:
 
     ```shell
     docker-compose up -d --build
-    docker-compose exec web python mange.py migrate
+    docker-compose exec web python manage.py migrate
     ```
 
-5. Run tests inside of Docker:
+3. Run tests inside of Docker:
 
     ```shell
-    docker-compose exec web python mange.py test
+    docker-compose exec web python manage.py test
     ```
+
+## Deployment
+
+The project is deployed on PythonAnywhere:
+
+- [bookstore API product](https://guscassiano.pythonanywhere.com/bookstore/v1/product/)
+- [bookstore API order](https://guscassiano.pythonanywhere.com/bookstore/v1/order/)
+
+## Contribution
+
+Feel free to contribute to this project by creating issues or submitting pull requests.
+
